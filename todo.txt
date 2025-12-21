@@ -1,0 +1,8 @@
+run an node for hardhat in new
+create an abi for marketplace.sol 
+create an json for same
+paste the deployment address into 
+
+
+change header.jsx and header.css to add buy token button
+create a button file that sends eth to to my account and token to user account
