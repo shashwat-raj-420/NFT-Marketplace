@@ -8,7 +8,6 @@ export const useBlockchainContext = () => {
   return useContext(BlockchainContext);
 };
 
-
 export const BlockchainProvider = ({ children }) => {
   const [provider, setProvider] = useState(null);
   const [contract, setContract] = useState(null);
@@ -51,7 +50,7 @@ export const BlockchainProvider = ({ children }) => {
       try {
         if (provider) {
           const signer = await provider.getSigner();
-          const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
+          const contractAddress = process.env.REACT_APP_MY_MARKET_PLACE_CONTRACT;
           const deployedContract = new Contract(contractAddress, ABI.abi, signer);
           setContract(deployedContract);
 
@@ -83,5 +82,3 @@ export const BlockchainProvider = ({ children }) => {
   );
 };
 
-
-// 0xF3FD7dd33e855a5311087929EedF7f3bD61DF02a

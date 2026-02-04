@@ -21,3 +21,10 @@
 
 # env file
 .env
+
+
+
+# useless files
+/scripts/uploadToIPFS.js
+/scripts/deploy_nft.ts
+/contracts/MyNFT.sol

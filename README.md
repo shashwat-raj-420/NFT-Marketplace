@@ -4,24 +4,32 @@
 npm install
 ```
 ## .env file
-create a .env file similar to .env.example and fill it with your keys
+create a .env file similar to .env.example and fill it with your keys in both root folder of the project and client folder
+
+## deploy marketplace contract
+```shell
+npx hardhat run scripts/deploy.ts --network sepolia
+```
+after deploying the contract add the latest deployment address in the .env file in client folder
 
 ## deploy token contract
 ```shell
 npx hardhat run scripts/deploy_token.ts --network sepolia
 ```
-after deploying the contract add the latest deployment address in the .env file
+after deploying the contract add the latest deployment address in the .env file in root folder of the project
 
 ## express server
 ``` shell
 npx ts-node server.ts
 ```
+do this in a seprate terminal
 
 ## react server
 ```shell
 cd .\client\
 npm run start
 ```
+do this in a seprate terminal
 
 
 

@@ -96,15 +96,15 @@ const Create = () => {
     }
 
     let loadingToastId;
-    if(!fileImg || !name || !price){
+    if (!fileImg || !name || !price) {
       toast.error('Upload the required data', {
         id: loadingToastId,
       });
     }
-    else{
+    else {
       try {
         loadingToastId = toast.loading('Sending data and minting NFT...');
-  
+
         await sendFileToIPFS();
         // console.log("File sent to IPFS and NFT minted successfully");
         toast.success('File sent to IPFS and NFT minted successfully', {
@@ -112,12 +112,12 @@ const Create = () => {
         });
       } catch (error) {
         // console.error("Error in sending file or minting NFT:", error);
-        toast.error('Error in sending file or minting NFT', {
+        toast.error('Error in sending file or minting NFT:\n' + process.env.REACT_APP_PINATA_API_KEY, {
           id: loadingToastId,
         });
       }
     }
-    
+
   };
 
   return (
@@ -130,11 +130,11 @@ const Create = () => {
             <Col lg="9" md="8" sm="6">
               <div className="create__item">
 
-              {currentAccount ? null : (
+                {currentAccount ? null : (
                   <div className="form__input">
-                    
-                      <p lg="12" className="connect-wallet-message text-center">Please connect your wallet to proceed.</p>
-                  
+
+                    <p lg="12" className="connect-wallet-message text-center">Please connect your wallet to proceed.</p>
+
                   </div>
                 )}
 
@@ -145,20 +145,20 @@ const Create = () => {
                       type="file"
                       className="upload__input"
                       onChange={(e) => setFileImg(e.target.files[0])}
-                       
+
                     />
                   </div>
 
                   <div className="form__input">
                     <label htmlFor="">
-                        Price <span className="required">*</span>
-                      </label>
+                      Price <span className="required">*</span>
+                    </label>
                     <input
                       type="number"
                       placeholder="Enter price for one item (ETH)"
                       value={price}
                       onChange={(e) => setPrice(e.target.value)}
-                       
+
                     />
                   </div>
 
@@ -209,7 +209,7 @@ const Create = () => {
                       placeholder="Enter title"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                       
+
                     />
                   </div>
 
@@ -237,7 +237,7 @@ const Create = () => {
                     Create NFT
                   </button>
                 </form>
-               
+
               </div>
             </Col>
           </Row>

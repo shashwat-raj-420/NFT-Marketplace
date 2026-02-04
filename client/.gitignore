@@ -24,3 +24,9 @@ yarn-error.log*
 
 # me 
 src/pages/SendToken.jsx
+.env
+
+# useless
+/src/build-info/solc-0_8_28-2947eec322164b601cf386925f7f1e2b9b0b86cd.json
+/src/build-info/solc-0_8_28-2947eec322164b601cf386925f7f1e2b9b0b86cd.output.json
+/src/contracts/MyNFT.sol
