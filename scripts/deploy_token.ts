@@ -13,8 +13,8 @@ async function main() {
     console.log("IndianToken deployed to:", await token.getAddress());
 
     // the last address to which deployed
-    // 0xAd875ABC59180FD557E24f7f365f798dB6363735
-    transferToken(await token.getAddress());
+    // 0x0072bd0388d3112d4850471b307ab2898c282656
+    // transferToken(await token.getAddress());
 }
 
 main().catch((err) => {

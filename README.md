@@ -1,3 +1,30 @@
+# To Run
+## install dependencies
+```shell
+npm install
+```
+## .env file
+create a .env file similar to .env.example and fill it with your keys
+
+## deploy token contract
+```shell
+npx hardhat run scripts/deploy_token.ts --network sepolia
+```
+after deploying the contract add the latest deployment address in the .env file
+
+## express server
+``` shell
+npx ts-node server.ts
+```
+
+## react server
+```shell
+cd .\client\
+npm run start
+```
+
+
+
 # Sample Hardhat 3 Beta Project (`mocha` and `ethers`)
 
 This project showcases a Hardhat 3 Beta project using `mocha` for tests and the `ethers` library for Ethereum interactions.

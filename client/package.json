@@ -10,6 +10,7 @@
     "axios": "^1.13.2",
     "bootstrap": "^5.3.8",
     "ethers": "^6.16.0",
+    "fs": "^0.0.1-security",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-hot-toast": "^2.6.0",
