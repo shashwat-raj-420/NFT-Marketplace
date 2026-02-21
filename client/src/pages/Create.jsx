@@ -79,7 +79,10 @@ const Create = () => {
 
   const mintNFT = async (tokenURI) => {
     try {
-      await contract.NFTminter(tokenURI, currentAccount);
+      const tx = await contract.NFTminter(tokenURI, currentAccount);
+
+      await tx.wait();
+
       // console.log("Your NFT has been minted successfully");
     } catch (error) {
       // console.error("Error while minting NFT with contract:", error);

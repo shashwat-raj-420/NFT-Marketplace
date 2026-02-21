@@ -27,6 +27,22 @@ export const BlockchainProvider = ({ children }) => {
     }
   };
 
+  const reloadContract = async () => {
+    if (!provider) return;
+
+    const signer = await provider.getSigner();
+
+    const contractAddress = process.env.REACT_APP_MY_MARKET_PLACE_CONTRACT;
+
+    const deployedContract = new Contract(
+      contractAddress,
+      ABI.abi,
+      signer
+    );
+
+    setContract(deployedContract);
+  };
+
   useEffect(() => {
     const loadWeb3 = async () => {
       if (window.ethereum) {
@@ -34,8 +50,27 @@ export const BlockchainProvider = ({ children }) => {
         setProvider(provider);
 
         // Listen for account changes and update the currentAccount state
-        window.ethereum.on('accountsChanged', (accounts) => {
-          setCurrentAccount(accounts[0] || ''); // Set to the first account or empty string if no account
+        window.ethereum.on('accountsChanged', async (accounts) => {
+
+          if (!accounts.length) {
+            setCurrentAccount("");
+            setContract(null);
+            return;
+          }
+
+          const signer = await provider.getSigner(accounts[0]);
+
+          const contractAddress = process.env.REACT_APP_MY_MARKET_PLACE_CONTRACT;
+
+          const deployedContract = new Contract(
+            contractAddress,
+            ABI.abi,
+            signer
+          );
+
+          setContract(deployedContract);
+          setCurrentAccount(accounts[0]);
+
         });
       } else {
         window.alert("Non-Ethereum browser detected. You should consider trying Metamask !");
@@ -46,26 +81,41 @@ export const BlockchainProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const loadBlockchainData = async () => {
-      try {
-        if (provider) {
-          const signer = await provider.getSigner();
-          const contractAddress = process.env.REACT_APP_MY_MARKET_PLACE_CONTRACT;
-          const deployedContract = new Contract(contractAddress, ABI.abi, signer);
-          setContract(deployedContract);
 
-          // Get the initial account and set it to currentAccount
-          const accounts = await window.ethereum.request({
-            method: "eth_accounts",
-          });
-          setCurrentAccount(accounts[0] || ""); // Set to the first account or empty string if no account
-        }
-      } catch (error) {
-        console.error("Error loading contract data:", error);
+    const loadBlockchainData = async () => {
+
+      if (!provider) return;
+
+      try {
+
+        const accounts = await window.ethereum.request({
+          method: "eth_accounts",
+        });
+
+        if (!accounts.length) return;
+
+        const signer = await provider.getSigner(accounts[0]);
+
+        const contractAddress = process.env.REACT_APP_MY_MARKET_PLACE_CONTRACT;
+
+        const deployedContract = new Contract(
+          contractAddress,
+          ABI.abi,
+          signer
+        );
+
+        setContract(deployedContract);
+        setCurrentAccount(accounts[0]);
+
       }
+      catch (error) {
+        console.error(error);
+      }
+
     };
 
     loadBlockchainData();
+
   }, [provider]);
 
   const contextValue = {
@@ -73,6 +123,7 @@ export const BlockchainProvider = ({ children }) => {
     contract,
     currentAccount,
     connectWallet,
+    reloadContract,
   };
 
   return (

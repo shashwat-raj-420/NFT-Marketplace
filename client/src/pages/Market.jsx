@@ -13,9 +13,9 @@ import "../styles/market.css";
 const Market = () => {
   const [data, setData] = useState(NFT__DATA);
 
-  const handleCategory = () => {};
+  const handleCategory = () => { };
 
-  const handleItems = () => {};
+  const handleItems = () => { };
 
   // ====== SORTING DATA BY HIGH, MID, LOW RATE =========
   const handleSort = (e) => {
